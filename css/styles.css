@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Simonetta:400,900|Ubuntu:400,700');
+body {
+
+  color: white;
+  text-align: center;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+    color: #222; 
+    font-family: 'Simonetta', cursive;
+    font-size: 2em;
+}
+.counter {
+    font-family: 'Ubuntu', sans-serif;
+    width: 400px; 
+    margin:  2em auto 0 auto;
+    background: #222;
+}
+
+.counter p {
+    margin: 0;
+    padding:  .5em;
+    font-size: 1.5em;
+}
+.boxes {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  margin:  0 auto;
+}
+
+.box {
+  width: 200px;
+  height: 200px;
+}
+
+.box-1 {
+  background: #44d353;
+}
+.box-2 {
+  background: #fa2e18;
+}
+.box-3 {
+  background: #fff72f;
+}
+.box-4 {
+  background: #0195ea;
+}
+
+.buttons {
+    display: flex;
+    width: 400px;
+    margin:  0 auto;
+}
+
+button {
+    font-family: 'Simonetta', cursive;
+    background: #222;
+    border:  none;
+    outline: none;
+    color: white;
+    width: 50%;
+    padding:  .5em;
+}
+.footer{
+    color: #222;
+
+}
+
+.footer a {
+    text-decoration: none;
+    color: black;
+}
