@@ -34,7 +34,7 @@ function playAudio(audioURL) {
 }
 
 function simonTurn(seq) {
-  startSeq(seq, 0);
+  startSeq(seq, 20);
   playerTurn();
 }
 
