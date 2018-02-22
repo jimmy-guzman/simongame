@@ -43,7 +43,7 @@ body {
 .box {
   width: 200px;
   height: 200px;
-  opacity: .3;
+  opacity: .5;
   transition: opacity 0.5s ease-in-out;
 
 }
@@ -96,5 +96,10 @@ button:hover, button:active {
     font-family: 'Simonetta', cursive;
     text-decoration: none;
     font-weight: 900;
+    color: white;
+}
+
+.strict-active {
+    background: red;
     color: white;
 }

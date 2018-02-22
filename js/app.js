@@ -19,12 +19,14 @@ function randSeq() {
 
 function startSeq() {
   isPlayerTurn = false;
-  setTimeout(function() {
+  setTimeout(function () {
     step(count);
     count++;
     updateCounter(count);
     if (count < maxSteps) startSeq();
-    playerTurn();
+    if (count === maxSteps) {
+      isPlayerTurn = true;
+    }
   }, 1500);
 }
 
@@ -41,14 +43,6 @@ function playAudio(audioURL) {
 
 function simonTurn() {
   startSeq();
-  // if (isPlayerTurn) playerTurn(maxSteps);
-}
-
-function playerTurn() {
-  // console.log(pickCount, count, picks, maxSteps);
-  if (count + 1 > maxSteps) {
-    isPlayerTurn = true;
-  }
 }
 
 function pick() {
@@ -66,18 +60,15 @@ function pick() {
 
 function checkIfCorrect(picks, index) {
   // console.log("picks: ", picks, rSeq[pickCount]);
-
   if (picks[pickCount] === rSeq[pickCount]) {
     pickCount++;
-    console.log("correct");
     playAudio(`sounds/sound${index + 1}.wav`);
     if (maxSteps === rSeq.length && pickCount === rSeq.length) {
       playAudio("sounds/applause.wav");
       playAudio(audioURL);
-      isPlayerTurn = false;stric
+      isPlayerTurn = false;
     } else if (pickCount === maxSteps) {
       pickCount = 0;
-      console.log("next round");
       count = 0;
       picks.length = 0;
       maxSteps++;
@@ -98,12 +89,7 @@ function checkIfCorrect(picks, index) {
 
 function startGame() {
   isStrictMode = false;
-  rSeq = randSeq();
-  console.log(rSeq);
-  pickCount = 0;
-  count = 0;
-  picks.length = 0;
-  maxSteps = 1;
+  defaultSettings()
   simonTurn();
 }
 
@@ -116,15 +102,19 @@ function updateCounter(steps) {
   counter.textContent = steps;
 }
 
-function startStrict() {
-  isStrictMode = true;
+function defaultSettings() {
   rSeq = randSeq();
-  console.log(rSeq);
   pickCount = 0;
   count = 0;
   picks.length = 0;
   maxSteps = 1;
+}
+
+function startStrict() {
+  isStrictMode = true;
+  defaultSettings()
   simonTurn();
+
 }
 
 boxes.forEach(box => box.addEventListener("click", pick));
