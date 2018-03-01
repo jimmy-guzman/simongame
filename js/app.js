@@ -51,15 +51,14 @@ function pick() {
     index = boxesArr.indexOf(this);
     boxes[index].classList.add("glow");
     picks.push(boxesArr.indexOf(this));
+    checkIfCorrect(picks, index);
   }
-
-  checkIfCorrect(picks, index);
   // console.log("pick count: ", pickCount);
 }
 
 function checkIfCorrect(picks, index) {
   // console.log("picks: ", picks, rSeq[pickCount]);
-  
+
   if (picks[pickCount] === rSeq[pickCount]) {
     pickCount++;
     playAudio(`sounds/sound${index + 1}.wav`);
@@ -87,12 +86,7 @@ function checkIfCorrect(picks, index) {
   }
 }
 
-// load default settings and start initial sequence
-function startGame() {
-  isStrictMode = false;
-  defaultSettings();
-  startSeq();
-}
+
 
 function removeTransition(e) {
   if (e.propertyName !== "opacity") return;
@@ -111,7 +105,18 @@ function defaultSettings() {
   maxSteps = 1;
 }
 
+// load default settings and start initial sequence
+function startGame() {
+  counter.textContent = "Normal Mode";
+  strictModeBtn.classList.remove('strict-active');
+  isStrictMode = false;
+  defaultSettings();
+  startSeq();
+}
+
 function startStrict() {
+  counter.textContent = "Strict Mode";
+  strictModeBtn.classList.add('strict-active');
   isStrictMode = true;
   defaultSettings();
   startSeq();
