@@ -17,6 +17,7 @@ function randSeq() {
   return initSeq.map(org => Math.floor(Math.random() * Math.floor(4)));
 }
 
+// turns player's turn off and starts sequence recursively until current max steps
 function startSeq() {
   isPlayerTurn = false;
   setTimeout(function () {
@@ -30,10 +31,10 @@ function startSeq() {
   }, 1500);
 }
 
+// makes next step glow and play sound
 function step(nextStep) {
   boxes[rSeq[nextStep]].classList.add("glow");
   playAudio(`sounds/sound${rSeq[nextStep] + 1}.wav`);
-  isNext = false;
 }
 
 function playAudio(audioURL) {
@@ -41,10 +42,8 @@ function playAudio(audioURL) {
   audio.play();
 }
 
-function simonTurn() {
-  startSeq();
-}
 
+// grabs the user's guess and call function to check if correct
 function pick() {
   const boxesArr = Array.from(boxes);
   let index = 0;
@@ -60,6 +59,7 @@ function pick() {
 
 function checkIfCorrect(picks, index) {
   // console.log("picks: ", picks, rSeq[pickCount]);
+  
   if (picks[pickCount] === rSeq[pickCount]) {
     pickCount++;
     playAudio(`sounds/sound${index + 1}.wav`);
@@ -72,7 +72,7 @@ function checkIfCorrect(picks, index) {
       count = 0;
       picks.length = 0;
       maxSteps++;
-      simonTurn();
+      startSeq();
     }
   } else {
     pickCount = 0;
@@ -80,17 +80,18 @@ function checkIfCorrect(picks, index) {
     count = 0;
     picks.length = 0;
     if (!isStrictMode) {
-      simonTurn();
+      startSeq();
     } else {
       startStrict();
     }
   }
 }
 
+// load default settings and start initial sequence
 function startGame() {
   isStrictMode = false;
-  defaultSettings()
-  simonTurn();
+  defaultSettings();
+  startSeq();
 }
 
 function removeTransition(e) {
@@ -112,9 +113,8 @@ function defaultSettings() {
 
 function startStrict() {
   isStrictMode = true;
-  defaultSettings()
-  simonTurn();
-
+  defaultSettings();
+  startSeq();
 }
 
 boxes.forEach(box => box.addEventListener("click", pick));
